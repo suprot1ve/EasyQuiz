@@ -70,13 +70,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\CreatorMatchingTask.cs" />
     <Compile Include="Models\CreatorMultipleChoiceTask.cs" />
+    <Compile Include="Models\CreatorMultipleResponseTask.cs" />
+    <Compile Include="Models\CreatorSequenceTask.cs" />
+    <Compile Include="Models\CreatorShortAnswerTask.cs" />
+    <Compile Include="Models\CreatorTrueFalseTask.cs" />
     <Compile Include="Models\CurrentQuiz.cs" />
     <Compile Include="Models\GradePoint.cs" />
     <Compile Include="Models\ICreatorTask.cs" />
     <Compile Include="Models\ITestTask.cs" />
+    <Compile Include="Models\MatchingAnswer.cs" />
+    <Compile Include="Models\MatchingTask.cs" />
     <Compile Include="Models\MultipleChoiceTask.cs" />
+    <Compile Include="Models\MultipleResponseTask.cs" />
     <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\SequenceAnswer.cs" />
+    <Compile Include="Models\SequenceTask.cs" />
+    <Compile Include="Models\ShortAnswerTask.cs" />
+    <Compile Include="Models\TrueFalseAnswer.cs" />
+    <Compile Include="Models\TrueFalseTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
