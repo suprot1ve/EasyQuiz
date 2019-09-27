@@ -69,6 +69,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Answer.cs" />
+    <Compile Include="Models\CreatorMultipleChoiceTask.cs" />
+    <Compile Include="Models\CurrentQuiz.cs" />
+    <Compile Include="Models\GradePoint.cs" />
+    <Compile Include="Models\ICreatorTask.cs" />
+    <Compile Include="Models\ITestTask.cs" />
+    <Compile Include="Models\MultipleChoiceTask.cs" />
+    <Compile Include="Models\Quiz.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,5 +102,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
