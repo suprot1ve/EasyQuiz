@@ -2,6 +2,6 @@
 {
 	public interface ICreatorTask
 	{
-		ITestTask Create();
+		ITestTask CreateTask();
 	}
 }

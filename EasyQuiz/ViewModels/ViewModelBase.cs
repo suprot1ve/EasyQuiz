@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace EasyQuiz.ViewModels
 {
-	class VisualModelBase : INotifyPropertyChanged
+	class ViewModelBase : INotifyPropertyChanged
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 

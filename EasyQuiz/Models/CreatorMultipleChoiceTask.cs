@@ -2,6 +2,6 @@
 {
 	public class CreatorMultipleChoiceTask : ICreatorTask
 	{
-		public ITestTask Create() => new MultipleChoiceTask();
+		public ITestTask CreateTask() => new MultipleChoiceTask();
 	}
 }

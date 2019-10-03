@@ -2,6 +2,6 @@
 {
 	public class CreatorShortAnswerTask : ICreatorTask
 	{
-		public ITestTask Create() => new ShortAnswerTask();
+		public ITestTask CreateTask() => new ShortAnswerTask();
 	}
 }

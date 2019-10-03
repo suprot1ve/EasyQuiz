@@ -23,7 +23,7 @@ namespace EasyQuizTests
 		public void TestAddMultipleChoiceTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorMultipleChoiceTask());
+			quiz.AddNewTask(new CreatorMultipleChoiceTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			MultipleChoiceTask task = quiz.Tasks[0] as MultipleChoiceTask;
 			Assert.IsNotNull(task);
@@ -38,7 +38,7 @@ namespace EasyQuizTests
 		public void TestAddMultipleResponseTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorMultipleResponseTask());
+			quiz.AddNewTask(new CreatorMultipleResponseTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			MultipleResponseTask task = quiz.Tasks[0] as MultipleResponseTask;
 			Assert.IsNotNull(task);
@@ -53,7 +53,7 @@ namespace EasyQuizTests
 		public void TestAddShortAnswerTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorShortAnswerTask());
+			quiz.AddNewTask(new CreatorShortAnswerTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			ShortAnswerTask task = quiz.Tasks[0] as ShortAnswerTask;
 			Assert.IsNotNull(task);
@@ -67,7 +67,7 @@ namespace EasyQuizTests
 		public void TestAddTrueFalseTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorTrueFalseTask());
+			quiz.AddNewTask(new CreatorTrueFalseTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			TrueFalseTask task = quiz.Tasks[0] as TrueFalseTask;
 			Assert.IsNotNull(task);
@@ -82,7 +82,7 @@ namespace EasyQuizTests
 		public void TestAddSequenceTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorSequenceTask());
+			quiz.AddNewTask(new CreatorSequenceTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			SequenceTask task = quiz.Tasks[0] as SequenceTask;
 			Assert.IsNotNull(task);
@@ -96,7 +96,7 @@ namespace EasyQuizTests
 		public void TestAddMatchingTask()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddTask(new CreatorMatchingTask());
+			quiz.AddNewTask(new CreatorMatchingTask());
 			Assert.AreEqual(quiz.Tasks.Count, 1);
 			MatchingTask task = quiz.Tasks[0] as MatchingTask;
 			Assert.IsNotNull(task);
@@ -111,7 +111,7 @@ namespace EasyQuizTests
 		public void TestAddGradePoint()
 		{
 			Quiz quiz = new Quiz("MyQuiz");
-			quiz.AddGradePoint();
+			quiz.AddNewGradePoint();
 			Assert.AreEqual(quiz.GradePoints.Count, 1);
 			GradePoint gradePoint = quiz.GradePoints[0] as GradePoint;
 			Assert.IsNotNull(gradePoint);

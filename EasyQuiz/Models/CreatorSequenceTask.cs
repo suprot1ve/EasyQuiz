@@ -2,6 +2,6 @@
 {
 	public class CreatorSequenceTask : ICreatorTask
 	{
-		public ITestTask Create() => new SequenceTask();
+		public ITestTask CreateTask() => new SequenceTask();
 	}
 }

@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace EasyQuiz.Infrastructure
 {
-	class Command : ICommand
+	public class Command : ICommand
 	{
 		private readonly Action<object> _execute;
 		private readonly Func<object, bool> _canExecute;

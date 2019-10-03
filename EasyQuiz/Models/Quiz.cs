@@ -1,30 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Runtime.Serialization;
 
 namespace EasyQuiz.Models
 {
-	public class Quiz
+	[DataContract]
+	[KnownType(typeof(Answer))]
+	[KnownType(typeof(MultipleChoiceTask))]
+	[KnownType(typeof(MultipleResponseTask))]
+	[KnownType(typeof(ShortAnswerTask))]
+	[KnownType(typeof(SequenceTask))]
+	[KnownType(typeof(MatchingTask))]
+	[KnownType(typeof(TrueFalseTask))]
+	[KnownType(typeof(SequenceAnswer))]
+	[KnownType(typeof(MatchingAnswer))]
+	[KnownType(typeof(TrueFalseAnswer))]
+	public class Quiz : INotifyPropertyChanged
 	{
 		private string _name;
 		private TimeSpan _timeLimit;
-		private List<ITestTask> _tasks;
-		private List<GradePoint> _gradePoints;
+		private ObservableCollection<ITestTask> _tasks;
+		private ObservableCollection<GradePoint> _gradePoints;
 
 		public Quiz(string name)
 		{
 			_name = name;
 			_timeLimit = TimeSpan.Zero;
-			_tasks = new List<ITestTask>();
-			_gradePoints = new List<GradePoint>();
+			_tasks = new ObservableCollection<ITestTask>();
+			_gradePoints = new ObservableCollection<GradePoint>();
 		}
 
-		public string Name { get => _name; set => _name = value; }
-		public TimeSpan TimeLimit { get => _timeLimit; set => _timeLimit = value; }
-		public List<ITestTask> Tasks { get => _tasks; }
-		public List<GradePoint> GradePoints { get => _gradePoints; }
+		[DataMember]
+		public string Name
+		{
+			get => _name;
+			set
+			{
+				_name = value;
+				OnPropertyChanged("Name");
+			}
+		}
+		[DataMember]
+		public TimeSpan TimeLimit
+		{
+			get => _timeLimit;
+			set
+			{
+				_timeLimit = value;
+				OnPropertyChanged("TimeLimit");
+			}
+		}
+		[DataMember]
+		public ObservableCollection<ITestTask> Tasks { get => _tasks; set => _tasks = value; }
+		[DataMember]
+		public ObservableCollection<GradePoint> GradePoints { get => _gradePoints; set => _gradePoints = value; }
 
-		public void AddTask(ICreatorTask creator) => _tasks.Add(creator.Create());
-		public void AddGradePoint() => _gradePoints.Add(new GradePoint());
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		public void OnPropertyChanged([CallerMemberName]string prop = "")
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(prop));
+		}
+
+		public void AddNewTask(ICreatorTask creator) => _tasks.Add(creator.CreateTask());
+		public void AddNewGradePoint() => _gradePoints.Add(new GradePoint());
 		public int GetResult() => throw new NotImplementedException();
 	}
 }

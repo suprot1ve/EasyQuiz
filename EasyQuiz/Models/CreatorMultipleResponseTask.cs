@@ -2,6 +2,6 @@
 {
 	public class CreatorMultipleResponseTask : ICreatorTask
 	{
-		public ITestTask Create() => new MultipleResponseTask();
+		public ITestTask CreateTask() => new MultipleResponseTask();
 	}
 }

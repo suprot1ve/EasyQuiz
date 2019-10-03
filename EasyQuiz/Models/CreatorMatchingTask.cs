@@ -2,6 +2,6 @@
 {
 	public class CreatorMatchingTask : ICreatorTask
 	{
-		public ITestTask Create() => new MatchingTask();
+		public ITestTask CreateTask() => new MatchingTask();
 	}
 }

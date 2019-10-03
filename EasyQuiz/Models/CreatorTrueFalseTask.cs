@@ -2,6 +2,6 @@
 {
 	public class CreatorTrueFalseTask : ICreatorTask
 	{
-		public ITestTask Create() => new TrueFalseTask();
+		public ITestTask CreateTask() => new TrueFalseTask();
 	}
 }
