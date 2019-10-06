@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 
 namespace EasyQuiz.Models
 {
@@ -6,13 +6,13 @@ namespace EasyQuiz.Models
 	{
 		private string _question = "Введите вопрос...";
 		private int _point = 1;
-		private List<SequenceAnswer> _answers;
+		private ObservableCollection<SequenceAnswer> _answers;
 
-		public SequenceTask() => _answers = new List<SequenceAnswer>();
+		public SequenceTask() => _answers = new ObservableCollection<SequenceAnswer>();
 
 		public string Question { get => _question; set => _question = value; }
 		public int Point { get => _point; set => _point = value; }
-		public List<SequenceAnswer> Answers { get => _answers; }
+		public ObservableCollection<SequenceAnswer> Answers { get => _answers; }
 
 		public void AddAnswer() => _answers.Add(new SequenceAnswer());
 		public int GetResult() => throw new System.NotImplementedException();

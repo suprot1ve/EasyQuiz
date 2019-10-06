@@ -2,7 +2,7 @@
 
 namespace EasyQuiz.Infrastructure
 {
-	class DefaultDialogService : IDialogService
+	public class DefaultDialogService : IDialogService
 	{
 		public string FilePath { get; set; }
 
