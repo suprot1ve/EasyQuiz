@@ -18,7 +18,7 @@ namespace EasyQuiz.Models
 		public ObservableCollection<Answer> Answers { get => _answers; }
 		public Answer RightAnswer { get => _rightAnswer; set => _rightAnswer = value; }
 
-		public void AddAnswer() => _answers.Add(new Answer());
+		public void AddNewAnswer() => _answers.Add(new Answer());
 		public int GetResult() => throw new System.NotImplementedException();
 	}
 }

@@ -16,7 +16,7 @@ namespace EasyQuiz.Models
 		public bool SwapAnswer { get => _swapAnswer; set => _swapAnswer = value; }
 		public ObservableCollection<MatchingAnswer> Answers { get => _answers; }
 
-		public void AddAnswer() => _answers.Add(new MatchingAnswer());
+		public void AddNewAnswer() => _answers.Add(new MatchingAnswer());
 		public int GetResult() => throw new System.NotImplementedException();
 	}
 }

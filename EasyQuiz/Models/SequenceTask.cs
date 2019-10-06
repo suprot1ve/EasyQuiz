@@ -14,7 +14,7 @@ namespace EasyQuiz.Models
 		public int Point { get => _point; set => _point = value; }
 		public ObservableCollection<SequenceAnswer> Answers { get => _answers; }
 
-		public void AddAnswer() => _answers.Add(new SequenceAnswer());
+		public void AddNewAnswer() => _answers.Add(new SequenceAnswer());
 		public int GetResult() => throw new System.NotImplementedException();
 	}
 }

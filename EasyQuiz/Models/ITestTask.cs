@@ -5,7 +5,7 @@
 		string Question { get; set; }
 		int Point { get; set; }
 
-		void AddAnswer();
+		void AddNewAnswer();
 		int GetResult();
 	}
 }

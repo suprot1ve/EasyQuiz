@@ -16,7 +16,7 @@ namespace EasyQuizTests
 		public void TestAddAnswer()
 		{
 			CurrentQuiz.Data.AddNewTask(new CreatorMultipleChoiceTask());
-			CurrentQuiz.Data.Tasks[0].AddAnswer();
+			CurrentQuiz.Data.Tasks[0].AddNewAnswer();
 			MultipleChoiceTask task = CurrentQuiz.Data.Tasks[0] as MultipleChoiceTask;
 			Assert.AreEqual(task.Answers[0].Value, "Ваш ответ...");
 			Assert.AreEqual(task.Answers[0].GetType(), typeof(Answer));
@@ -26,7 +26,7 @@ namespace EasyQuizTests
 		public void TestAddTrueFalseAnswer()
 		{
 			CurrentQuiz.Data.AddNewTask(new CreatorMultipleResponseTask());
-			CurrentQuiz.Data.Tasks[0].AddAnswer();
+			CurrentQuiz.Data.Tasks[0].AddNewAnswer();
 			MultipleResponseTask task = CurrentQuiz.Data.Tasks[0] as MultipleResponseTask;
 			Assert.AreEqual(task.Answers[0].Value, "Ваш ответ...");
 			Assert.AreEqual(task.Answers[0].GetType(), typeof(TrueFalseAnswer));
@@ -36,7 +36,7 @@ namespace EasyQuizTests
 		public void TestAddMatchingAnswer()
 		{
 			CurrentQuiz.Data.AddNewTask(new CreatorMatchingTask());
-			CurrentQuiz.Data.Tasks[0].AddAnswer();
+			CurrentQuiz.Data.Tasks[0].AddNewAnswer();
 			MatchingTask task = CurrentQuiz.Data.Tasks[0] as MatchingTask;
 			Assert.AreEqual(task.Answers[0].Value, "Ваш ответ...");
 			Assert.AreEqual(task.Answers[0].GetType(), typeof(MatchingAnswer));
@@ -46,7 +46,7 @@ namespace EasyQuizTests
 		public void TestAddSequenceAnswer()
 		{
 			CurrentQuiz.Data.AddNewTask(new CreatorSequenceTask());
-			CurrentQuiz.Data.Tasks[0].AddAnswer();
+			CurrentQuiz.Data.Tasks[0].AddNewAnswer();
 			SequenceTask task = CurrentQuiz.Data.Tasks[0] as SequenceTask;
 			Assert.AreEqual(task.Answers[0].Value, "Ваш ответ...");
 			Assert.AreEqual(task.Answers[0].GetType(), typeof(SequenceAnswer));
