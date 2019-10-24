@@ -3,10 +3,96 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:EasyQuiz.Views"
+        xmlns:helpers="clr-namespace:EasyQuiz.Infrastructure"
         mc:Ignorable="d"
-        Title="QuizRunner" Height="450" Width="800">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None" WindowState="Normal"
+        SizeToContent="WidthAndHeight"
+        MinWidth="1024" MinHeight="700" WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="EasyQuizRunner" Icon="../Images/icon.png">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/Resources/TasksDictionaryForQuizRunner.xaml" />
+    </Window.Resources>
+
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+
+        <!-- Header -->
+        <Grid   Grid.Row="0"
+                Background="{StaticResource PrimaryHueDarkBrush}">
+            <TextBlock Text="{Binding CurrentQuiz.Name}" 
+                       Foreground="White"
+                       FontSize="24"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontFamily="Impact" />
+            <materialDesign:PopupBox Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"
+                                     PlacementMode="BottomAndAlignRightEdges" 
+                                     StaysOpen="False"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Center"
+                                     Margin="10">
+                <StackPanel>
+                    <Button Content="Свернуть" Command="{Binding MinimizeCommand}" />
+                    <Button Content="Развернуть" Command="{Binding MaximizeCommand}" />
+                    <Button Content="Закрыть" Command="{Binding CloseCommand}"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </Grid>
+
+        <!-- Task -->
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                <ContentPresenter Content="{Binding CurrentTask}" />
+
+                <Button Margin="5" 
+                    Content="Ответить" HorizontalAlignment="Right"
+                    Command="{Binding GiveAnswerCommand}" />
+            </StackPanel>
+        </ScrollViewer>
+
+
+        <Grid Grid.Row="2" Margin="10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="{Binding CurrentQuiz.TimeLimit}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <ProgressBar Margin="10" Grid.Column="1"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Center"
+                         Minimum="0"
+                         Maximum="{Binding CurrentQuiz.Tasks.Count}" 
+                         Value="{Binding CountTask}" />
+            <StackPanel Grid.Column="2" Orientation="Horizontal" 
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Right">
+                <TextBlock Text="{Binding CountTask}"/>
+                <TextBlock Text=" / " />
+                <TextBlock Text="{Binding CurrentQuiz.Tasks.Count}" />
+            </StackPanel>
+
+        </Grid>
     </Grid>
 </Window>
