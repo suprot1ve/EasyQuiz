@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+using EasyQuiz.Infrastructure;
 
 namespace EasyQuiz.Models
 {
@@ -19,6 +23,23 @@ namespace EasyQuiz.Models
 		public Answer RightAnswer { get => _rightAnswer; set => _rightAnswer = value; }
 
 		public void AddNewAnswer() => _answers.Add(new Answer());
-		public int GetResult() => throw new System.NotImplementedException();
+
+		public void RemoveAnswer(Answer answer) => _answers.Remove(answer);
+		public int GetResult()
+		{
+			Answer userAnswer = (from ans in Answers where ans.UserChoice select ans).FirstOrDefault();
+			return (userAnswer?.Value == RightAnswer?.Value) ? Point : 0;
+		}
+
+		public int GetMaxPointsPerTask() => Point;
+
+		public void ShuffleAnswers()
+		{
+			if (SwapAnswer)
+			{
+				Random rng = new Random();
+				rng.Shuffle(Answers);
+			}
+		}
 	}
 }

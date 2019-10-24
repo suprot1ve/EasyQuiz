@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+using EasyQuiz.Infrastructure;
 
 namespace EasyQuiz.Models
 {
@@ -17,6 +21,29 @@ namespace EasyQuiz.Models
 		public ObservableCollection<TrueFalseAnswer> Answers { get => _answers; }
 
 		public void AddNewAnswer() => _answers.Add(new TrueFalseAnswer());
-		public int GetResult() => throw new System.NotImplementedException();
+		public void RemoveAnswer(Answer answer) => _answers.Remove(answer as TrueFalseAnswer);
+		public int GetResult()
+		{
+			int countRightAnswers = (from ans in Answers where ans.UserChoice && ans.IsTrue select ans).Count();
+			return countRightAnswers * Point;
+		}
+
+		public int GetMaxPointsPerTask()
+		{
+			int maxPointsPerTask = 0;
+			foreach (var answer in Answers)
+				if (answer.IsTrue)
+					maxPointsPerTask += Point;
+			return maxPointsPerTask;
+		}
+
+		public void ShuffleAnswers()
+		{
+			if (SwapAnswer)
+			{
+				Random rng = new Random();
+				rng.Shuffle(Answers);
+			}
+		}
 	}
 }

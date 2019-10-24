@@ -60,6 +60,8 @@
     <Compile Include="Infrastructure\IDialogService.cs" />
     <Compile Include="Infrastructure\IFileService.cs" />
     <Compile Include="Infrastructure\JsonFileService.cs" />
+    <Compile Include="Infrastructure\RandomExtensions.cs" />
+    <Compile Include="Models\MultipleAnswer.cs" />
     <Compile Include="ViewModels\QuizEditorViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="MainWindow.xaml">

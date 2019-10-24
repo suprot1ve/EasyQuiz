@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Collections.ObjectModel;
 using EasyQuiz.Models;
 using NUnit.Framework;
 
@@ -31,7 +31,7 @@ namespace EasyQuizTests
 			Assert.AreEqual(task.Point, 1);
 			Assert.IsFalse(task.SwapAnswer);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<Answer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<Answer>));
 		}
 
 		[Test]
@@ -46,7 +46,7 @@ namespace EasyQuizTests
 			Assert.AreEqual(task.Point, 1);
 			Assert.IsFalse(task.SwapAnswer);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<TrueFalseAnswer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<MultipleAnswer>));
 		}
 
 		[Test]
@@ -60,7 +60,7 @@ namespace EasyQuizTests
 			Assert.AreEqual(task.Question, "Введите вопрос...");
 			Assert.AreEqual(task.Point, 1);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<Answer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<Answer>));
 		}
 
 		[Test]
@@ -75,7 +75,7 @@ namespace EasyQuizTests
 			Assert.AreEqual(task.Point, 1);
 			Assert.IsFalse(task.SwapAnswer);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<TrueFalseAnswer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<TrueFalseAnswer>));
 		}
 
 		[Test]
@@ -89,7 +89,7 @@ namespace EasyQuizTests
 			Assert.AreEqual(task.Question, "Введите вопрос...");
 			Assert.AreEqual(task.Point, 1);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<SequenceAnswer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<SequenceAnswer>));
 		}
 
 		[Test]
@@ -102,9 +102,8 @@ namespace EasyQuizTests
 			Assert.IsNotNull(task);
 			Assert.AreEqual(task.Question, "Введите вопрос...");
 			Assert.AreEqual(task.Point, 1);
-			Assert.IsFalse(task.SwapAnswer);
 			Assert.AreEqual(task.Answers.Count, 0);
-			Assert.AreEqual(task.Answers.GetType(), typeof(List<MatchingAnswer>));
+			Assert.AreEqual(task.Answers.GetType(), typeof(ObservableCollection<MatchingAnswer>));
 		}
 
 		[Test]

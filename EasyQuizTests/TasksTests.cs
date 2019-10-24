@@ -25,9 +25,9 @@ namespace EasyQuizTests
 		[Test]
 		public void TestAddTrueFalseAnswer()
 		{
-			CurrentQuiz.Data.AddNewTask(new CreatorMultipleResponseTask());
+			CurrentQuiz.Data.AddNewTask(new CreatorTrueFalseTask());
 			CurrentQuiz.Data.Tasks[0].AddNewAnswer();
-			MultipleResponseTask task = CurrentQuiz.Data.Tasks[0] as MultipleResponseTask;
+			TrueFalseTask task = CurrentQuiz.Data.Tasks[0] as TrueFalseTask;
 			Assert.AreEqual(task.Answers[0].Value, "Ваш ответ...");
 			Assert.AreEqual(task.Answers[0].GetType(), typeof(TrueFalseAnswer));
 		}

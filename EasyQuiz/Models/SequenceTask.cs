@@ -1,4 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+
+using EasyQuiz.Infrastructure;
 
 namespace EasyQuiz.Models
 {
@@ -15,6 +19,18 @@ namespace EasyQuiz.Models
 		public ObservableCollection<SequenceAnswer> Answers { get => _answers; }
 
 		public void AddNewAnswer() => _answers.Add(new SequenceAnswer());
-		public int GetResult() => throw new System.NotImplementedException();
+		public void RemoveAnswer(Answer answer) => _answers.Remove(answer as SequenceAnswer);
+		public int GetResult()
+		{
+			int countRightAnswers = (from ans in Answers where ans.SequenceNumber == ans.UserSequenceNumber select ans).Count();
+			return countRightAnswers * Point;
+		}
+		public int GetMaxPointsPerTask() => Answers.Count * Point;
+
+		public void ShuffleAnswers()
+		{
+			Random rng = new Random();
+			rng.Shuffle(Answers);
+		}
 	}
 }
