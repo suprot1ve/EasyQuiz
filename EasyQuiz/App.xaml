@@ -8,6 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+                <ResourceDictionary Source="/Resources/TasksDictionary.xaml" />
+                <ResourceDictionary Source="/Resources/AnswersDictionary.xaml" />
+                <ResourceDictionary Source="/Resources/TaskCreatorsDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!-- Primary -->
             <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#744CE0"/>

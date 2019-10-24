@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:EasyQuiz.Resources"
+                    xmlns:models="clr-namespace:EasyQuiz.Models">
+
+    <!-- All creators of task-->
+    <models:CreatorMultipleChoiceTask x:Key="MultipleChoiceTask"/>
+    <models:CreatorMultipleResponseTask x:Key="MultipleResponseTask"/>
+    <models:CreatorShortAnswerTask x:Key="ShortAnswerTask"/>
+    <models:CreatorSequenceTask x:Key="SequenceTask"/>
+    <models:CreatorMatchingTask x:Key="MatchingTask"/>
+    <models:CreatorTrueFalseTask x:Key="TrueFalseTask"/>
+
+</ResourceDictionary>

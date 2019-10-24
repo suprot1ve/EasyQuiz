@@ -1,0 +1,75 @@
+﻿<Window x:Class="EasyQuiz.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:EasyQuiz"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        SizeToContent="WidthAndHeight" MinWidth="480" MinHeight="320"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="Settings" Icon="../Images/icon.png">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="4*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{StaticResource PrimaryHueDarkBrush}">
+            <TextBlock Text="Настройки" 
+                       Foreground="White"
+                       FontSize="24"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontFamily="Impact" />
+            <Button HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignRaisedButton}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    Command="{Binding CloseCommand}"
+                    Margin="5">
+                <materialDesign:PackIcon Kind="Close" />
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <TabControl Margin="10">
+                <TabItem Header="Основные">
+                    <StackPanel>
+                        <TextBlock Text="Название теста:" />
+                        <TextBox Text="{Binding CurrentQuiz.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Ограничение по времени:" />
+                        <CheckBox IsChecked="{Binding Path=CurrentQuiz.TimeLimitOn, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox Text="{Binding CurrentQuiz.TimeLimit, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Навигация">
+                    <StackPanel>
+                        <TextBlock Text="Перемешать вопросы:" />
+                        <CheckBox IsChecked="{Binding Path=CurrentQuiz.SwapTasks, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </TabItem>
+                <TabItem Header="Результат">
+                    <StackPanel>
+                        <TextBlock Text="Показывать текст:" />
+                        <TextBox Text="{Binding CurrentQuiz.ResultMsg, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBlock Text="Показывать набранные баллы:" />
+                        <CheckBox IsChecked="{Binding Path=CurrentQuiz.ShowResult, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+        </Grid>
+
+    </Grid>
+</Window>

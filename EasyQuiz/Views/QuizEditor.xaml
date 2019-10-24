@@ -3,10 +3,283 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:EasyQuiz.Views"
+        xmlns:helpers="clr-namespace:EasyQuiz.Infrastructure"
         mc:Ignorable="d"
-        Title="QuizEditor" Height="450" Width="800">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStyle="None" WindowState="Normal"
+        SizeToContent="WidthAndHeight"
+        MinWidth="1024" MinHeight="700" WindowStartupLocation="CenterScreen"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="EasyQuizEditor" Icon="../Images/icon.png">
+
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Background="{StaticResource PrimaryHueDarkBrush}">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Background="{x:Null}"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Column="0"
+                        Margin="5">
+
+                <!-- Settings Buttons -->
+                <StackPanel Margin="0 0 10 0">
+                    <Button Command="{Binding NewCommand}"
+                            ToolTip="Создать новый тест" Margin="2">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Create"
+                                                     Margin="0 0 5 0" />
+                            <TextBlock Text="Создать" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding OpenCommand}"
+                            ToolTip="Открыть тест" Margin="2" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="OpenInNew"
+                                                     Margin="0 0 5 0" />
+                            <TextBlock Text="Открыть" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel>
+                    <Button Command="{Binding SaveCommand}" 
+                            ToolTip="Сохранить тест" Margin="2" >
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ContentSave"
+                                                     Margin="0 0 5 0" />
+                            <TextBlock Text="Сохранить" />
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding EditCommand}" 
+                        Margin="2"
+                        ToolTip="Открыть окно настройки">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Settings"
+                                                     Margin="0 0 5 0" />
+                            <TextBlock Text="Настройки" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Background="{x:Null}"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Column="1"
+                        Margin="5">
+
+                <!-- Pick tasks -->
+                <StackPanel Margin="0 0 10 0">
+
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource MultipleChoiceTask}"
+                            Content="Один вариант ответа" 
+                            ToolTip="Вопрос с одним вариантом ответа" 
+                            Margin="2" />
+
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource MultipleResponseTask}"
+                            Content="Множественный ответ" 
+                            ToolTip="Вопрос с нескольками вариантами ответов" 
+                            Margin="2" />
+
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource ShortAnswerTask}"
+                            Content="Короткий ответ" 
+                            ToolTip="Вопрос с коротким ответом" 
+                            Margin="2" />
+
+                </StackPanel>
+
+                <StackPanel>
+
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource SequenceTask}"
+                            Content="Порядок" 
+                            ToolTip="Вопрос с установленнием порядка" 
+                            Margin="2" />
+
+                    <!-- MatchingTask in developing -->
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource MatchingTask}"
+                            Content="Сопоставление" 
+                            ToolTip="Вопрос с сопоставлением вариантов" 
+                            Margin="2"
+                            IsEnabled="False"/>
+
+                    <Button Command="{Binding AddTaskCommand}"
+                            CommandParameter="{StaticResource TrueFalseTask}"
+                            Content="Правда/Ложь" 
+                            ToolTip="Вопрос поиском истиности" 
+                            Margin="2" />
+
+                </StackPanel>
+
+            </StackPanel>
+
+            <materialDesign:PopupBox Foreground="{StaticResource PrimaryHueDarkForegroundBrush}"
+                                     Grid.Column="1"
+                                     PlacementMode="BottomAndAlignRightEdges" 
+                                     StaysOpen="False"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Top"
+                                     Margin="10">
+                <StackPanel>
+                    <Button Content="Свернуть" Command="{Binding MinimizeCommand}" />
+                    <Button Content="Развернуть" Command="{Binding MaximizeCommand}" />
+                    <Button Content="Закрыть" Command="{Binding CloseCommand}"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+        </Grid>
+
+        <!-- Editor of Quiz -->
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Editor of Tasks and Grade Points -->
+            <Grid Grid.Column="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="10">
+                    <Grid>
+                        <TextBlock Text="Задания:" 
+                            VerticalAlignment="Center"
+                            TextAlignment="Left" />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding RemoveTaskCommand}"
+                                HorizontalAlignment="Right">
+                            <materialDesign:PackIcon Kind="Delete" />
+                        </Button>
+                    </Grid>
+                    <ListBox ItemsSource="{Binding CurrentQuiz.Tasks}"
+                             SelectedItem="{Binding SelectedTask}"
+                             Height="400">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock FontSize="16" TextTrimming="CharacterEllipsis"
+                                               Text="{Binding Question}" />
+                                    <TextBlock Text="Баллы за правильный ответ:" />
+                                    <TextBlock Text="{Binding Point}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Margin="10">
+                    <Grid>
+                        <TextBlock Text="Оценки:" 
+                            VerticalAlignment="Center"
+                            TextAlignment="Left" />
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{Binding AddGradePointCommand}">
+                                <materialDesign:PackIcon Kind="Add" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding RemoveGradePointCommand}">
+                                <materialDesign:PackIcon Kind="Delete" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <ListBox ItemsSource="{Binding CurrentQuiz.GradePoints}"
+                         SelectedItem="{Binding SelectedGradePoint}"
+                             Height="150">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="До " VerticalAlignment="Center" />
+                                    <TextBox Text="{Binding Percent, UpdateSourceTrigger=PropertyChanged}" 
+                                             MaxLength="9" VerticalAlignment="Center" />
+                                    <TextBlock Text=" процентов" VerticalAlignment="Center" />
+                                    <TextBlock Text=" отметка: " VerticalAlignment="Center" />
+                                    <TextBox Text="{Binding Point, UpdateSourceTrigger=PropertyChanged}"
+                                             MaxLength="9" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+
+            </Grid>
+
+            <!-- Editor of Task and Answers-->
+            <Grid Grid.Column="1">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.1*" />
+                    <RowDefinition Height="2*" />
+                </Grid.RowDefinitions>
+
+                <ContentPresenter Grid.Row="0" 
+                                  Content="{Binding SelectedTask }" />
+
+                <StackPanel Grid.Row="1" Margin="10">
+                    <Grid>
+                        <TextBlock Text="Ответы:" 
+                            VerticalAlignment="Center"
+                            TextAlignment="Left" />
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{Binding AddAnswerCommand}">
+                                <materialDesign:PackIcon Kind="Add" />
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{Binding RemoveAnswerCommand}">
+                                <materialDesign:PackIcon Kind="Delete" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <ListBox ItemsSource="{Binding SelectedTask.Answers}"
+                             SelectedItem="{Binding SelectedAnswer}"
+                             Height="500">
+                        <ListBox.ItemTemplateSelector>
+                            <helpers:AnswerSelector
+                                Answer="{StaticResource Ans}"
+                                MultipleAnswer="{StaticResource MultipleAns}"
+                                SequenceAnswer="{StaticResource SequenceAns}"
+                                MatchingAnswer="{StaticResource MatchingAns}"
+                                TrueFalseAnswer="{StaticResource TrueFalseAns}" />
+                        </ListBox.ItemTemplateSelector>
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
     </Grid>
+
 </Window>
